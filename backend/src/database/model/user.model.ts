@@ -1,4 +1,6 @@
 import { model, Schema, Document } from "mongoose";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import Role from "./role.model";
 
 export const DOCUMENT_NAME = "User";
@@ -12,6 +14,8 @@ export default interface User extends Document {
   deletedAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
+  isCorrectPassword: (a: string, b: string) => Promise<boolean>;
+  generateToken: (a: { id: string }, b: string, c: string) => {};
 }
 
 const schema = new Schema(
@@ -52,5 +56,27 @@ const schema = new Schema(
     timestamps: true,
   }
 );
+
+schema.pre("save", async function (next): Promise<void> {
+  // crypt password
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+});
+
+schema.methods.isCorrectPassword = async function (
+  psw1: string,
+  psw2: string
+): Promise<boolean> {
+  return await bcrypt.compare(psw1, psw2);
+};
+schema.methods.generateToken = function (
+  id: string,
+  secert: string,
+  expire: string
+): String {
+  return jwt.sign(id, secert, {
+    expiresIn: expire,
+  });
+};
 
 export const UserModel = model<User>(DOCUMENT_NAME, schema, COLLECTION_NAME);

@@ -9,7 +9,7 @@ export default class UserRepo {
       .select("+email +password +roles")
       .populate({
         path: "roles",
-        match: { deletedAt: { $ne: null } },
+        select: "code",
       })
       .lean<User>();
   }
@@ -23,9 +23,8 @@ export default class UserRepo {
       .select("+email +password +roles")
       .populate({
         path: "roles",
-        select: { code: 1 },
-      })
-      .lean<User>();
+        select: "code",
+      });
   }
 
   //function update user info
