@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { protect, restrictTo } from "../controller/auth.controller";
-import { createUser, getMe, getUsers } from "../controller/user.controller";
+import { createFamille, getFamilles } from "../controller/famille.controller";
 
 const router = Router();
 router.use(protect);
-router.route("/me").get(getMe);
-router.route("/").get(getUsers).post(createUser);
+router.route("/").get(getFamilles).post(createFamille);
 
 export default router;

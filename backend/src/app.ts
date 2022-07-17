@@ -11,9 +11,7 @@ import swaggerUi from "swagger-ui-express";
 import centerliazedErrorHandler from "./errorHandler/centerliazedErrorHandler";
 import ClientError from "./errorHandler/ClientError";
 // routes
-import authRoute from "./routes/auth.route";
-import userRoute from "./routes/user.route";
-import roleRoute from "./routes/role.route";
+import appRouter from "./routes/index";
 import options from "./helper/swagger";
 const app = express();
 // midllewares
@@ -37,9 +35,7 @@ const swaggerSpec = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // routes
-app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/roles", roleRoute);
-app.use("/api/v1/users", userRoute);
+app.use("/api/v1", appRouter);
 app.use("*", (req: Request, res: Response, next: NextFunction) => {
   next(
     new ClientError("can not find " + req.originalUrl + " on this server", 404)

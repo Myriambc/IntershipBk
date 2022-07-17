@@ -28,3 +28,16 @@ export const createUser: RequestHandler = catchAsync(
     });
   }
 );
+
+export const getMe: RequestHandler = catchAsync(
+  async (req, res: Response, next: NextFunction) => {
+    const user = await UserRepository.findById(req.user._id);
+    if (!user) return next(new HttpError("can not create user", 500));
+    user.password = undefined;
+    res.status(200).json({
+      status: "success",
+      code: 201,
+      payload: user,
+    });
+  }
+);

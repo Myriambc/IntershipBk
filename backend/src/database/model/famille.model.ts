@@ -18,7 +18,7 @@ const schema = new Schema(
     },
     img: {
       type: String,
-      required: true,
+      // required: true,
     },
     deletedAt: {
       type: Date,

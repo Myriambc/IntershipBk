@@ -1,9 +1,9 @@
 import { model, Schema, Document } from "mongoose";
 
-export const DOCUMENT_NAME = "Phase";
-export const COLLECTION_NAME = "phases";
+export const DOCUMENT_NAME = "Client";
+export const COLLECTION_NAME = "clients";
 
-export default interface Phase extends Document {
+export default interface Client extends Document {
   label: string;
 }
 
@@ -25,4 +25,8 @@ const schema = new Schema(
   }
 );
 
-export const PhaseModel = model<Phase>(DOCUMENT_NAME, schema, COLLECTION_NAME);
+export const ClientModel = model<Client>(
+  DOCUMENT_NAME,
+  schema,
+  COLLECTION_NAME
+);

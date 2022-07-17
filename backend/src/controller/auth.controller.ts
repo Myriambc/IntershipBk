@@ -36,9 +36,7 @@ export const protect: RequestHandler = catchAsync(
     }
     if (!token) return next(new ClientError("You're Not Logged In ! ", 401));
     // 2 verify
-    console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET_STRING);
-    console.log(decoded);
     // 3 check if user still exist
     //@ts-ignore
     const currentUser = await UserRepo.findById(new Types.ObjectId(decoded.id));
