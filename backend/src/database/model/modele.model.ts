@@ -55,7 +55,7 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    img: {
+    image: {
       type: String,
     },
     deliveryDate: {

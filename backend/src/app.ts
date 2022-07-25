@@ -33,7 +33,8 @@ const swaggerSpec = swaggerJsdoc(options);
 
 // Swagger page
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+// static file
+app.use(express.static("./"));
 // routes
 app.use("/api/v1", appRouter);
 app.use("*", (req: Request, res: Response, next: NextFunction) => {

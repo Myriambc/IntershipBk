@@ -5,7 +5,6 @@ export const COLLECTION_NAME = "lignes-produits";
 
 export default interface LigneProduit extends Document {
   label: string;
-  img: string;
 }
 
 const schema = new Schema(
@@ -16,10 +15,7 @@ const schema = new Schema(
       trim: true,
       maxlength: 100,
     },
-    img: {
-      type: String,
-      // required: true,
-    },
+
     deletedAt: {
       type: Date,
     },

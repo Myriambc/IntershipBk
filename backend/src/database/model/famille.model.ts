@@ -5,7 +5,6 @@ export const COLLECTION_NAME = "familles";
 
 export default interface Famille extends Document {
   label: string;
-  img: string;
 }
 
 const schema = new Schema(
@@ -15,10 +14,6 @@ const schema = new Schema(
       required: true,
       trim: true,
       maxlength: 100,
-    },
-    img: {
-      type: String,
-      // required: true,
     },
     deletedAt: {
       type: Date,

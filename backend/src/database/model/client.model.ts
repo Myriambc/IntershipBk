@@ -5,6 +5,7 @@ export const COLLECTION_NAME = "clients";
 
 export default interface Client extends Document {
   label: string;
+  logo: string;
 }
 
 const schema = new Schema(
@@ -14,6 +15,9 @@ const schema = new Schema(
       required: true,
       trim: true,
       maxlength: 100,
+    },
+    logo: {
+      type: String,
     },
     deletedAt: {
       type: Date,

@@ -1,14 +1,14 @@
-import BaseError from './BaseError';
-import { logger } from './logger';
+import BaseError from "./BaseError";
+import { logger } from "./logger";
 
 class ErrorHandler {
-  public async handleError(err: BaseError, res): Promise<void> {
-    await logger.error(
-      'Error message from the centralized error-handling component',
-      err,
+  public handleError(err: BaseError, res): void {
+    logger.error(
+      "Error message from the centralized error-handling component",
+      err
     );
     res.status(err.httpCode).json({
-      status: 'fail',
+      status: "fail",
       message: err.description,
     });
   }
